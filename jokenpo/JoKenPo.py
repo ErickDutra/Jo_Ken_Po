@@ -1,5 +1,5 @@
-import random
-import time
+from random import randint
+from time import sleep
 
 
 
@@ -29,47 +29,45 @@ MAQUINA:{placar_maquina}
 =============================
 """)
 
-def verificar(jogador,maquina,placar_jogador: int,placar_maquina: int):
-    placar_jogador = placar_jogador
-    placar_maquina = placar_maquina
-    
+
+def verificar(jogador,maquina):
+    global placar_jogador
+    global placar_maquina
+
     if jogador == 0 and maquina == 1 :
         print("Voce Perdeu !!!")
-        return placar_maquina + 1
+        placar_maquina += 1
     
         
     elif jogador == 0 and maquina == 2 :
         print("Voce ganhou !!!")
-        return placar_jogador + 1
+        placar_jogador += 1
 
     elif jogador == 0 and maquina == 0:
         print("Empate")
 
     if jogador == 1 and maquina == 2 :
         print("Voce Perdeu !!!")
-
-        return placar_maquina + 1
+        placar_maquina += 1 
       
     elif jogador == 1 and maquina == 0 :
         print("Voce ganhou !!!")
-
-        return placar_jogador + 1
+        placar_jogador += 1
         
     elif jogador == 1 and maquina == 1:
         print("Empate")
 
     if jogador == 2 and maquina == 0 :
         print("Voce Perdeu !!!")
-
-        return placar_maquina + 1
+        placar_maquina += 1 
         
     elif jogador == 2 and maquina == 1 :
         print("Voce ganhou !!!")
-
-        return placar_jogador + 1
+        placar_jogador += 1
         
     elif jogador == 2 and maquina == 2:
         print("Empate")
+
 
 def resultado_maquina(maquina):
     if maquina == 0:
@@ -79,37 +77,43 @@ def resultado_maquina(maquina):
     elif maquina == 2:
         print("Tesoura")
 
+
 def tempo():
-    time.sleep(0.5)
+    sleep(0.5)
     print("JO")
-    time.sleep(0.5)
+    sleep(0.5)
     print("KEN")
-    time.sleep(0.5)
+    sleep(0.5)
     print("PO")
     
+
 jogador =  0
-
-inicio = 1
 print(layout)
-
 placar_maquina = int(0)
 placar_jogador = int(0)
 
-while jogador != 9 :
-
-    if inicio != 0:
-                print(placar_jogador,placar_maquina)
-
-    maquina = random.randint(0,2)
+while True :
+    maquina = randint(0,2)
     jogador = int(input("Escolha:"))
 
-    tempo()
-    time.sleep(0.5)
-    resultado_maquina(maquina)
-    time.sleep(0.5)
+    if jogador == 0 or jogador == 1 or jogador == 2 :
+        tempo()
+        sleep(0.5)
+        resultado_maquina(maquina)
+        sleep(0.5)
+        verificar(jogador,maquina)
+        sleep(0.5)
+        layout_placar(placar_jogador,placar_maquina)
+        
+    elif jogador == 9:
+            break 
 
-    verificar(jogador,maquina,placar_jogador,placar_maquina)
+    elif jogador != 0 or jogador != 1 or jogador != 2 or jogador != 9 :
+        print("jogada invalida")
+        jogador = int(input("Escolha:"))
+
     
 
-    inicio += 1
+    
+
     
